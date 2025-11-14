@@ -1,0 +1,602 @@
+{
+    "version": "2.0",
+    "meta": {
+      "critical": {
+        "ips": [
+          "149.72.161.59",
+          "149.72.42.201",
+          "149.72.154.87"
+        ],
+        "domains": [
+          "*.keepnetlabs.com",
+          "*.simulation.keepnetlabs.com"
+        ],
+        "apiUrls": [
+          "https://api.keepnetlabs.com/api/*",
+          "https://dash.keepnetlabs.com",
+          "https://addin-api.keepnetlabs.com/api/*"
+        ]
+      },
+      "documentation": {
+        "pdfSource": "white.pdf - Keepnet's Platform and Products Documentation",
+        "lastUpdated": "2025-10-13"
+      }
+    },
+    "flows": [
+      {
+        "id": "advanced_delivery",
+        "site": "security.microsoft.com",
+        "name": "Third-party Phishing Simulations (Advanced Delivery)",
+        "description": "PDF Sayfa 4-5: Advanced delivery özelliği ile allow list yapılandırması",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Security Center'a Giriş",
+            "description": "Microsoft Security & Compliance Center'a giriş yapın",
+            "navigate": {
+              "url": "https://security.microsoft.com/homepage"
+            },
+            "requirements": "Security administrator veya Exchange Online Organization Management üyesi olmalısınız"
+          },
+          {
+            "id": 2,
+            "title": "Policies & Rules",
+            "description": "Sol menüden 'Policies & rules' (İlkeler ve kurallar) bölümüne tıklayın",
+            "navigate": {
+              "url": "https://security.microsoft.com/securitysettings"
+            },
+            "selectors": [
+              "a[href*='/securitysettings']",
+              "a[data-automation-id*='scc-nav-securitypoliciesandrules']",
+              "button:has-text('Policies')",
+              "a:has-text('Policies & rules')",
+              "a:has-text('İlkeler ve kurallar')"
+            ],
+            "textIncludes": ["Policies", "rules", "İlkeler", "kurallar"]
+          },
+          {
+            "id": 3,
+            "title": "Threat Policies → Advanced Delivery",
+            "description": "'Threat policies' altında 'Advanced delivery' bölümüne gidin",
+            "navigate": {
+              "url": "https://security.microsoft.com/advanceddelivery"
+            },
+            "selectors": [
+              "a[href*='/advanceddelivery']",
+              "a[aria-label*='Advanced delivery']",
+              "button:has-text('Advanced delivery')"
+            ],
+            "textIncludes": ["Advanced delivery", "Gelişmiş teslim"],
+            "validate": "advanced_delivery_page"
+          },
+          {
+            "id": 4,
+            "title": "Phishing Simulations Tab",
+            "description": "'Phishing simulations' sekmesine tıklayın",
+            "selectors": [
+              "[role='tab']:has-text('Phishing')",
+              "button[name='Phishing simulations']",
+              ".ms-Pivot-text:has-text('Phishing')"
+            ],
+            "textIncludes": ["Phishing simulations", "Kimlik avı simülasyonları"],
+            "validate": "phishing_tab",
+            "pdfReference": "Sayfa 5, Step 5"
+          },
+          {
+            "id": 5,
+            "title": "Edit Düğmesi",
+            "description": "'Edit' veya 'Düzenle' düğmesine tıklayın",
+            "selectors": [
+              "button[aria-label*='Edit']",
+              "button:has-text('Düzenle')",
+              "button:has-text('Edit')",
+              ".ms-Button:has-text('Edit')"
+            ],
+            "textIncludes": ["Edit", "Düzenle"],
+            "pdfReference": "Sayfa 5, Step 5"
+          },
+          {
+            "id": 6,
+            "title": "Sending IP Ekleme",
+            "description": "Keepnet IP adreslerini 'Sending IP' bölümüne ekleyin: 149.72.161.59, 149.72.42.201, 149.72.154.87",
+            "validate": "sending_ip",
+            "required": ["meta.critical.ips"],
+            "selectors": [
+              "input[aria-label*='Sending IP']",
+              "textarea[aria-label*='Sending IP']",
+              "[data-automationid*='SendingIP']",
+              "input[placeholder*='IP']"
+            ],
+            "realTimeValidation": true,
+            "expectedValues": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+            "pdfReference": "Sayfa 5, Step 6 - IP addresses to be allowed",
+            "helpText": "Her IP'yi virgül veya yeni satır ile ayırarak ekleyin"
+          },
+          {
+            "id": 7,
+            "title": "Domain Ekleme (MAIL FROM)",
+            "description": "Domain adresini (MAIL FROM adresi) 'Domains' bölümüne ekleyin",
+            "validate": "domains_mail_from",
+            "required": ["meta.critical.domains"],
+            "selectors": [
+              "input[aria-label*='Domains']",
+              "input[aria-label*='Domain']",
+              "textarea[aria-label*='Domains']"
+            ],
+            "realTimeValidation": true,
+            "pdfReference": "Sayfa 5, Step 7",
+            "helpText": "Keepnet platformundan aldığınız domain adresini ekleyin"
+          },
+          {
+            "id": 8,
+            "title": "Simulation URLs (Wildcard)",
+            "description": "Phishing domainlerini wildcard formatında ekleyin: *.keepnetlabs.com/* veya *.simulation.keepnetlabs.com/*",
+            "validate": "simulation_urls_wildcard",
+            "required": ["meta.critical.domains"],
+            "selectors": [
+              "input[aria-label*='Simulation URL']",
+              "textarea[aria-label*='URL']",
+              "input[aria-label*='allow']"
+            ],
+            "realTimeValidation": true,
+            "expectedFormat": "*.domain.com/*",
+            "pdfReference": "Sayfa 5, Step 8 - Wildcard syntax",
+            "helpText": "ZORUNLU: *.domain.com/* formatını kullanın"
+          },
+          {
+            "id": 9,
+            "title": "Kaydetme",
+            "description": "'Save' butonuna tıklayarak işlemi tamamlayın",
+            "selectors": [
+              "button[aria-label*='Save']",
+              "button:has-text('Save')",
+              "button:has-text('Kaydet')"
+            ],
+            "textIncludes": ["Save", "Kaydet"],
+            "pdfReference": "Sayfa 5, Step 9",
+            "captureScreenshot": true
+          }
+        ]
+      },
+      {
+        "id": "connection_filter",
+        "site": "security.microsoft.com",
+        "name": "Threat Policies - Connection Filter (Anti-Spam)",
+        "description": "PDF Sayfa 5-6: Connection Filter ile IP allow list yapılandırması",
+        "steps": [
+          {
+            "id": 10,
+            "title": "Anti-Spam Policies",
+            "description": "'Policies and rules' → 'Anti-Spam' bölümüne gidin",
+            "navigate": {
+              "url": "https://security.microsoft.com/antispam"
+            },
+            "selectors": [
+              "a[href*='/antispam']",
+              "a:has-text('Anti-spam')"
+            ],
+            "pdfReference": "Sayfa 6, Step 3"
+          },
+          {
+            "id": 11,
+            "title": "Connection Filter Policy",
+            "description": "'Connection Filter Policy' satırının checkbox'ına tıklayın (satırı seçmek için)",
+            "pdfReference": "Sayfa 6, Step 4",
+            "helpText": "Connection Filter Policy satırını seçin"
+          },
+          {
+            "id": 12,
+            "title": "IP Allow List",
+            "description": "Keepnet IP'lerini 'Always allow messages from the following IP addresses' bölümüne ekleyin",
+            "validate": "connection_filter_ips",
+            "required": ["meta.critical.ips"],
+            "selectors": [
+              "input[aria-label*='IP address']",
+              "textarea[aria-label*='allow']"
+            ],
+            "realTimeValidation": true,
+            "expectedValues": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+            "pdfReference": "Sayfa 6, Step 5"
+          },
+          {
+            "id": 13,
+            "title": "Safe List Açma",
+            "description": "'Turn on safe list' seçeneğini etkinleştirin",
+            "validate": "safe_list_enabled",
+            "selectors": [
+              "input[type='checkbox'][aria-label*='safe list']",
+              "button:has-text('Turn on safe list')"
+            ],
+            "pdfReference": "Sayfa 6, Step 6",
+            "criticalCheck": true
+          },
+          {
+            "id": 14,
+            "title": "Kaydetme",
+            "description": "'Save' ile kaydedin",
+            "selectors": ["button:has-text('Save')"],
+            "pdfReference": "Sayfa 6, Step 7",
+            "captureScreenshot": true
+          }
+        ]
+      },
+      {
+        "id": "safe_links",
+        "site": "security.microsoft.com",
+        "name": "Safe Links Policy",
+        "description": "PDF Sayfa 6-7: Safe Links ile false click önleme",
+        "steps": [
+          {
+            "id": 15,
+            "title": "Safe Links Politikası",
+            "description": "'Policies and rules' → 'Threat Policies' → 'Safe Links'",
+            "navigate": {
+              "url": "https://security.microsoft.com/safelinksv2"
+            },
+            "pdfReference": "Sayfa 7, Step 3"
+          },
+          {
+            "id": 16,
+            "title": "Create Policy",
+            "description": "'Create' butonuna tıklayın",
+            "selectors": [
+              "button:has-text('Create')",
+              "button[aria-label*='Create']"
+            ],
+            "pdfReference": "Sayfa 7, Step 4"
+          },
+          {
+            "id": 17,
+            "title": "Policy Adı ve Açıklama",
+            "description": "Policy için ad ve açıklama girin, 'Next' tıklayın",
+            "selectors": [
+              "input[aria-label*='Name']",
+              "textarea[aria-label*='Description']"
+            ],
+            "pdfReference": "Sayfa 7, Step 5"
+          },
+          {
+            "id": 18,
+            "title": "Domain Seçimi",
+            "description": "Şirket domaininizi seçin ve 'Next'",
+            "pdfReference": "Sayfa 7, Step 6"
+          },
+          {
+            "id": 19,
+            "title": "Track User Clicks: OFF",
+            "description": "'Track user clicks' seçeneğini KAPATIN",
+            "validate": "track_clicks_off",
+            "selectors": [
+              "input[type='checkbox'][aria-label*='Track user clicks']"
+            ],
+            "expectedState": false,
+            "pdfReference": "Sayfa 7, Step 7",
+            "criticalCheck": true
+          },
+          {
+            "id": 20,
+            "title": "Office 365 Apps: OFF",
+            "description": "'Office 365 Apps' seçeneğini KAPATIN",
+            "validate": "office365_apps_off",
+            "selectors": [
+              "input[type='checkbox'][aria-label*='Office 365 Apps']"
+            ],
+            "expectedState": false,
+            "pdfReference": "Sayfa 7, Step 7",
+            "criticalCheck": true
+          },
+          {
+            "id": 21,
+            "title": "Do Not Rewrite URLs - Wildcard Domain",
+            "description": "'Do not rewrite the following URLs' bölümüne wildcard domain ekleyin: *.keepnetlabs.com/*",
+            "validate": "do_not_rewrite_urls",
+            "required": ["meta.critical.domains"],
+            "selectors": [
+              "input[aria-label*='Do not rewrite']",
+              "textarea[aria-label*='URL']"
+            ],
+            "realTimeValidation": true,
+            "expectedFormat": "*.domain.com/*",
+            "pdfReference": "Sayfa 7, Step 8",
+            "helpText": "*.domain.com/* wildcard formatını kullanın"
+          },
+          {
+            "id": 22,
+            "title": "Submit",
+            "description": "'Next' → 'Submit' ile tamamlayın",
+            "selectors": [
+              "button:has-text('Submit')",
+              "button:has-text('Next')"
+            ],
+            "pdfReference": "Sayfa 7, Step 9",
+            "captureScreenshot": true
+          }
+        ]
+      },
+      {
+        "id": "mail_flow_rules",
+        "site": "admin.exchange.microsoft.com",
+        "name": "Mail Flow Rules (3 Kurallar)",
+        "description": "PDF Sayfa 7-11: Exchange Admin'de 3 mail flow kuralı oluşturma - Spam Filter Bypass, Skip Safe Links, Skip Safe Attachments",
+        "steps": [
+          {
+            "id": 23,
+            "title": "Exchange Admin Portal",
+            "description": "Exchange Admin Portal → Mail Flow → Rules sayfasına gidin",
+            "navigate": {
+              "url": "https://admin.exchange.microsoft.com/#/transportrules"
+            },
+            "pdfReference": "Sayfa 8, Step 1-2"
+          },
+          {
+            "id": 24,
+            "title": "Kural 1: Bypass Spam Filter - Başlangıç",
+            "description": "'+ Add a rule' → 'Bypass Spam Filter' seçin",
+            "selectors": [
+              "button:has-text('Add a rule')",
+              "button[aria-label*='Add']",
+              "a:has-text('Bypass spam')"
+            ],
+            "pdfReference": "Sayfa 8, Step 2-3"
+          },
+          {
+            "id": 25,
+            "title": "Kural 1: Ad Belirleme",
+            "description": "Kural adı: 'Keepnet Bypass Spam Filter' veya benzeri bir isim girin",
+            "selectors": [
+              "input[aria-label*='Name']"
+            ],
+            "pdfReference": "Sayfa 8, Step 4"
+          },
+          {
+            "id": 26,
+            "title": "Kural 1: Sender IP Condition",
+            "description": "'Apply this rule if...' → 'The sender' → 'IP address is in any of these ranges or exactly matches' seçin",
+            "pdfReference": "Sayfa 8, Step 5"
+          },
+          {
+            "id": 27,
+            "title": "Kural 1: IP Adresleri",
+            "description": "Keepnet IP'lerini ekleyin: 149.72.161.59, 149.72.42.201, 149.72.154.87",
+            "validate": "mail_flow_sender_ips",
+            "required": ["meta.critical.ips"],
+            "realTimeValidation": true,
+            "expectedValues": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+            "pdfReference": "Sayfa 8, Step 5a"
+          },
+          {
+            "id": 28,
+            "title": "Kural 1: SCL = -1 Ayarı",
+            "description": "'Do the following' → 'Modify message properties' → 'Set SCL to' → '-1' seçin (Bypass spam filtering)",
+            "validate": "scl_minus_one",
+            "selectors": [
+              "select[aria-label*='spam confidence level']",
+              "option[value='-1']"
+            ],
+            "pdfReference": "Sayfa 8, Step 6",
+            "criticalCheck": true
+          },
+          {
+            "id": 29,
+            "title": "Kural 1: Bypass Clutter Header",
+            "description": "'+ Add action' → 'Set a message header' → Header: 'X-MS-Exchange-Organization-BypassClutter', Value: 'true'",
+            "validate": "bypass_clutter_header",
+            "pdfReference": "Sayfa 8, Step 7",
+            "criticalCheck": true
+          },
+          {
+            "id": 30,
+            "title": "Kural 1: Kaydet",
+            "description": "'Save' tıklayın ve kuralın 'Enabled' olduğundan emin olun",
+            "selectors": [
+              "button:has-text('Save')"
+            ],
+            "pdfReference": "Sayfa 8, Step 8-9",
+            "captureScreenshot": true
+          },
+          {
+            "id": 31,
+            "title": "Kural 2: Skip Safe Links - Başlangıç",
+            "description": "Tekrar '+ Add a rule' → 'Create a new rule' seçin",
+            "navigate": {
+              "url": "https://admin.exchange.microsoft.com/#/transportrules"
+            },
+            "selectors": [
+              "button:has-text('Add a rule')",
+              "button[aria-label*='Add']"
+            ],
+            "pdfReference": "Sayfa 9, Step 1-3"
+          },
+          {
+            "id": 32,
+            "title": "Kural 2: Ad Belirleme",
+            "description": "Kural adı: 'Keepnet Skip Safe Links Processing' girin",
+            "selectors": [
+              "input[aria-label*='Name']"
+            ],
+            "pdfReference": "Sayfa 9, Step 4"
+          },
+          {
+            "id": 33,
+            "title": "Kural 2: Sender IP Condition",
+            "description": "'Apply this rule if...' → 'The sender' → 'IP address is in any of these ranges' → Keepnet IP'lerini ekleyin",
+            "validate": "skip_links_sender_ips",
+            "required": ["meta.critical.ips"],
+            "realTimeValidation": true,
+            "expectedValues": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+            "pdfReference": "Sayfa 9, Step 5"
+          },
+          {
+            "id": 34,
+            "title": "Kural 2: SkipSafeLinksProcessing Header",
+            "description": "'Do the following' → 'Set a message header' → Header: 'X-MS-Exchange-Organization-SkipSafeLinksProcessing', Value: '1'",
+            "validate": "skip_safe_links_header",
+            "pdfReference": "Sayfa 9, Step 6",
+            "criticalCheck": true
+          },
+          {
+            "id": 35,
+            "title": "Kural 2: Kaydet",
+            "description": "'Save' tıklayın ve kuralın 'Enabled' olduğundan emin olun",
+            "selectors": [
+              "button:has-text('Save')"
+            ],
+            "pdfReference": "Sayfa 9, Step 7-8",
+            "captureScreenshot": true
+          },
+          {
+            "id": 36,
+            "title": "Kural 3: Skip Safe Attachments - Başlangıç",
+            "description": "Tekrar '+ Add a rule' → 'Create a new rule' seçin",
+            "navigate": {
+              "url": "https://admin.exchange.microsoft.com/#/transportrules"
+            },
+            "selectors": [
+              "button:has-text('Add a rule')",
+              "button[aria-label*='Add']"
+            ],
+            "pdfReference": "Sayfa 11, Step 1-3"
+          },
+          {
+            "id": 37,
+            "title": "Kural 3: Ad Belirleme",
+            "description": "Kural adı: 'Keepnet Skip Safe Attachments Processing' girin",
+            "selectors": [
+              "input[aria-label*='Name']"
+            ],
+            "pdfReference": "Sayfa 11, Step 4"
+          },
+          {
+            "id": 38,
+            "title": "Kural 3: Sender IP Condition",
+            "description": "'Apply this rule if...' → 'The sender' → 'IP address is in any of these ranges' → Keepnet IP'lerini ekleyin",
+            "validate": "skip_attachments_sender_ips",
+            "required": ["meta.critical.ips"],
+            "realTimeValidation": true,
+            "expectedValues": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+            "pdfReference": "Sayfa 11, Step 5"
+          },
+          {
+            "id": 39,
+            "title": "Kural 3: SkipSafeAttachmentProcessing Header",
+            "description": "'Do the following' → 'Set a message header' → Header: 'X-MS-Exchange-Organization-SkipSafeAttachmentProcessing', Value: '1'",
+            "validate": "skip_safe_attachments_header",
+            "pdfReference": "Sayfa 11, Step 6",
+            "criticalCheck": true
+          },
+          {
+            "id": 40,
+            "title": "Kural 3: Kaydet ve Tamamla",
+            "description": "'Save' tıklayın ve kuralın 'Enabled' olduğundan emin olun. 3 kural tamamlandı!",
+            "selectors": [
+              "button:has-text('Save')"
+            ],
+            "pdfReference": "Sayfa 11, Step 7-8",
+            "captureScreenshot": true
+          }
+        ]
+      },
+      {
+        "id": "troubleshooting",
+        "site": "admin.exchange.microsoft.com",
+        "name": "Troubleshooting - Message Trace",
+        "description": "PDF Sayfa 11-12: E-posta teslim sorunlarını çözme",
+        "steps": [
+          {
+            "id": 41,
+            "title": "Message Trace",
+            "description": "'Exchange' → 'Mail flow' → 'Message Trace' → '+ start a trace'",
+            "navigate": {
+              "url": "https://admin.exchange.microsoft.com/#/messagetrace"
+            },
+            "pdfReference": "Sayfa 12, Step 2"
+          },
+          {
+            "id": 42,
+            "title": "Gönderen Adresi Arama",
+            "description": "'Senders' alanına Keepnet gönderen adresini girin ve 'Search'",
+            "validate": "message_trace_search",
+            "pdfReference": "Sayfa 12, Step 3-4"
+          },
+          {
+            "id": 43,
+            "title": "E-posta Detayları",
+            "description": "Teslim edilen e-postaları listeleyin ve detayları kontrol edin",
+            "validate": "message_trace_delivered",
+            "pdfReference": "Sayfa 12, Step 4-5",
+            "captureScreenshot": true
+          }
+        ]
+      }
+    ],
+    "validations": {
+      "sending_ip": {
+        "type": "ip_list",
+        "required": ["149.72.161.59", "149.72.42.201", "149.72.154.87"],
+        "message": {
+          "tr": "Keepnet IP adreslerini ekleyin",
+          "en": "Add Keepnet IP addresses"
+        },
+        "pdfReference": "Sayfa 1-2, 5"
+      },
+      "simulation_urls_wildcard": {
+        "type": "wildcard_domains",
+        "required": ["*.keepnetlabs.com/*", "*.simulation.keepnetlabs.com/*"],
+        "format": "*.domain.com/*",
+        "message": {
+          "tr": "Wildcard domain ekleyin (*.domain.com/*)",
+          "en": "Add wildcard domain (*.domain.com/*)"
+        },
+        "pdfReference": "Sayfa 5, Step 8"
+      },
+      "safe_links": {
+        "type": "safe_links_config",
+        "checks": [
+          "track_clicks_off",
+          "office365_apps_off",
+          "exception_domain"
+        ],
+        "message": {
+          "tr": "Safe Links yapılandırmasını tamamlayın",
+          "en": "Complete Safe Links configuration"
+        },
+        "pdfReference": "Sayfa 6-7"
+      },
+      "connection_filter": {
+        "type": "connection_filter_config",
+        "checks": [
+          "ip_allow_list",
+          "safe_list_enabled"
+        ],
+        "message": {
+          "tr": "Connection Filter ayarlarını yapın",
+          "en": "Configure Connection Filter settings"
+        },
+        "pdfReference": "Sayfa 5-6"
+      },
+      "mail_flow_rules": {
+        "type": "mail_flow_rules_config",
+        "requiredRules": [
+          {
+            "name": "Bypass Spam Filter",
+            "header": "SCL = -1",
+            "pdfReference": "Sayfa 7-8"
+          },
+          {
+            "name": "Skip Safe Links Processing",
+            "header": "X-MS-Exchange-Organization-SkipSafeLinksProcessing = 1",
+            "pdfReference": "Sayfa 8-9"
+          },
+          {
+            "name": "Skip Safe Attachments Processing",
+            "header": "X-MS-Exchange-Organization-SkipSafeAttachmentProcessing = 1",
+            "pdfReference": "Sayfa 10-11"
+          }
+        ],
+        "message": {
+          "tr": "3 mail flow kuralı oluşturun",
+          "en": "Create 3 mail flow rules"
+        }
+      }
+    }
+  }

@@ -1,0 +1,261 @@
+/* Keepnet Allow List Assistant v4.0 - Advanced Animations */
+/* 🎨 Profesyonel Framer Motion benzeri animasyonlar */
+/* ✨ Smooth, spring-based transitions with cubic-bezier easing */
+/* 🎯 Optimized for 60fps performance */
+
+/* ========== ENTRANCE ANIMATIONS ========== */
+@keyframes keepnet-slide-in-right {
+  from { 
+    opacity: 0; 
+    transform: translateX(100px) scale(0.95);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes keepnet-slide-in-bottom {
+  from { 
+    opacity: 0; 
+    transform: translateY(50px) scale(0.95);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes keepnet-fade-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+@keyframes keepnet-fade-in-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+/* ========== ATTENTION ANIMATIONS ========== */
+@keyframes keepnet-pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.85; 
+    transform: scale(1.03);
+  }
+}
+
+@keyframes keepnet-pulse-glow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 6px rgba(124, 58, 237, 0.3),
+      0 0 20px rgba(124, 58, 237, 0.6);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 8px rgba(124, 58, 237, 0.4),
+      0 0 30px rgba(124, 58, 237, 0.8);
+  }
+}
+
+@keyframes keepnet-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes keepnet-bounce {
+  0%, 100% { 
+    transform: translateY(0); 
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(-15px); 
+    opacity: 0.9;
+  }
+}
+
+/* ========== INTERACTIVE ANIMATIONS ========== */
+@keyframes keepnet-scale-in {
+  from { 
+    transform: scale(0);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes keepnet-rotate-in {
+  from { 
+    transform: rotate(-180deg) scale(0);
+    opacity: 0;
+  }
+  to { 
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========== PROGRESS ANIMATIONS ========== */
+@keyframes keepnet-progress-flow {
+  0% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+  100% { 
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes keepnet-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ========== EXIT ANIMATIONS ========== */
+@keyframes keepnet-fade-out {
+  from { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  to { 
+    opacity: 0; 
+    transform: scale(0.95);
+  }
+}
+
+@keyframes keepnet-slide-out-right {
+  from { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0; 
+    transform: translateX(100px);
+  }
+}
+
+/* Element highlighting - MOR/MAVİ GRADIENT (Profesyonel) */
+.keepnet-highlight {
+  outline: 4px solid #7c3aed !important;
+  outline-offset: 4px !important;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(99, 102, 241, 0.15)) !important;
+  box-shadow: 
+    0 0 0 6px rgba(124, 58, 237, 0.3),
+    0 0 20px rgba(124, 58, 237, 0.6),
+    inset 0 0 20px rgba(124, 58, 237, 0.1) !important;
+  position: relative !important;
+  z-index: 999998 !important;
+  animation: keepnet-pulse 2s ease-in-out infinite !important;
+  cursor: pointer !important;
+}
+
+/* OK İŞARETİ - MOR */
+.keepnet-arrow {
+  position: absolute !important;
+  font-size: 48px !important;
+  color: #7c3aed !important;
+  animation: keepnet-bounce 1s ease-in-out infinite !important;
+  z-index: 999999 !important;
+  text-shadow: 2px 2px 8px rgba(124, 58, 237, 0.4) !important;
+  pointer-events: none !important;
+}
+
+@keyframes keepnet-bounce {
+  0%, 100% { 
+    transform: translateY(0px); 
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(-10px); 
+    opacity: 0.8;
+  }
+}
+
+.keepnet-element-highlight {
+  animation: keepnet-pulse 2s ease-in-out infinite !important;
+}
+
+/* Overlay container (fallback) */
+.keepnet-overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 999998;
+}
+
+.keepnet-spotlight {
+  position: absolute;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========== BUTTON ANIMATIONS ========== */
+button {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 16px rgba(124, 58, 237, 0.4) !important;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.3) !important;
+}
+
+/* ========== TOOLTIP STYLES ========== */
+.keepnet-tooltip {
+  animation: keepnet-fade-in-up 0.3s ease-out !important;
+  transition: all 0.3s ease !important;
+}
+
+/* ========== SUMMARY ANIMATIONS ========== */
+.keepnet-summary {
+  animation: keepnet-fade-in 0.5s ease-out !important;
+}
+
+.keepnet-summary > div {
+  opacity: 0;
+  animation: keepnet-fade-in-up 0.4s ease-out forwards !important;
+}
+
+.keepnet-summary > div:nth-child(1) { animation-delay: 0.1s !important; }
+.keepnet-summary > div:nth-child(2) { animation-delay: 0.2s !important; }
+.keepnet-summary > div:nth-child(3) { animation-delay: 0.3s !important; }
+
+/* Ensure Keepnet components don't inherit unexpected styles */
+.keepnet-floating-panel,
+.keepnet-fab,
+.keepnet-element-highlight,
+.keepnet-element-tooltip {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}

@@ -1,0 +1,74 @@
+{
+  "extensionName": {
+    "message": "Keepnet Assistant",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Automatic allow list configuration assistant for Keepnet phishing simulations in Office 365 - Smart navigation, real-time validation and evidence collection",
+    "description": "Extension description"
+  },
+  "extensionTitle": {
+    "message": "Keepnet Assistant - Click to start",
+    "description": "Extension action title"
+  },
+  "assistantTitle": {
+    "message": "Keepnet Assistant",
+    "description": "Panel title"
+  },
+  "step": {
+    "message": "Step",
+    "description": "Step word"
+  },
+  "of": {
+    "message": "of",
+    "description": "Separator"
+  },
+  "goAndFix": {
+    "message": "Go & Fix",
+    "description": "Go and fix button"
+  },
+  "close": {
+    "message": "Close",
+    "description": "Close button"
+  },
+  "understood": {
+    "message": "Got it",
+    "description": "Got it button"
+  },
+  "completed": {
+    "message": "Completed",
+    "description": "Completed status"
+  },
+  "inProgress": {
+    "message": "In Progress",
+    "description": "In progress status"
+  },
+  "summaryReport": {
+    "message": "📊 Summary Report",
+    "description": "Summary report title"
+  },
+  "congratsTitle": {
+    "message": "Congratulations! You've Completed All Steps!",
+    "description": "Congratulations title"
+  },
+  "congratsDesc": {
+    "message": "With these steps, you've successfully added IP addresses to your Office 365 allow list and configured security simulations, spam filtering, and Advanced Threat Protection (ATP) features!",
+    "description": "Congratulations description"
+  },
+  "workflowsCompleted": {
+    "message": "6 Workflows",
+    "description": "Workflows completed count"
+  },
+  "stepsSuccessful": {
+    "message": "62 Steps",
+    "description": "Steps successful count"
+  },
+  "allScreenshotsSaved": {
+    "message": "All screenshots saved in chrome.storage",
+    "description": "Screenshot save message"
+  },
+  "screenshotSaved": {
+    "message": "Screenshot saved",
+    "description": "Screenshot saved"
+  }
+}

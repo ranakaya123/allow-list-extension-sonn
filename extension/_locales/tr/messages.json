@@ -1,0 +1,74 @@
+{
+  "extensionName": {
+    "message": "Keepnet Assistant",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Office 365'te Keepnet phishing simülasyonları için otomatik allow list asistanı - Akıllı navigasyon ve kanıt toplama",
+    "description": "Extension description"
+  },
+  "extensionTitle": {
+    "message": "Keepnet Assistant - Başlatmak için tıklayın",
+    "description": "Extension action title"
+  },
+  "assistantTitle": {
+    "message": "Keepnet Assistant",
+    "description": "Panel title"
+  },
+  "step": {
+    "message": "Adım",
+    "description": "Step word"
+  },
+  "of": {
+    "message": "/",
+    "description": "Separator"
+  },
+  "goAndFix": {
+    "message": "Git ve Düzelt",
+    "description": "Go and fix button"
+  },
+  "close": {
+    "message": "Kapat",
+    "description": "Close button"
+  },
+  "understood": {
+    "message": "Anladım",
+    "description": "Got it button"
+  },
+  "completed": {
+    "message": "Tamamlandı",
+    "description": "Completed status"
+  },
+  "inProgress": {
+    "message": "Devam Ediyor",
+    "description": "In progress status"
+  },
+  "summaryReport": {
+    "message": "📊 Özet Rapor",
+    "description": "Summary report title"
+  },
+  "congratsTitle": {
+    "message": "Tebrikler! Tüm Adımları Tamamladınız!",
+    "description": "Congratulations title"
+  },
+  "congratsDesc": {
+    "message": "Bu adımlar ile Office 365 ortamında IP adreslerini allow list'e eklediniz ve güvenlik simülasyonları, spam filtreleme ve tehdit öncesi (ATP) özelliklerini başarıyla yapılandırdınız!",
+    "description": "Congratulations description"
+  },
+  "workflowsCompleted": {
+    "message": "6 Workflow",
+    "description": "Workflows completed count"
+  },
+  "stepsSuccessful": {
+    "message": "62 Adım",
+    "description": "Steps successful count"
+  },
+  "allScreenshotsSaved": {
+    "message": "Tüm screenshot'lar chrome.storage'da kaydedildi",
+    "description": "Screenshot save message"
+  },
+  "screenshotSaved": {
+    "message": "Screenshot kaydedildi",
+    "description": "Screenshot saved"
+  }
+}

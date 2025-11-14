@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "short_name": "Keepnet Assistant",
+  "version": "3.1.1",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "tr",
+  "author": "Keepnet Labs",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://security.microsoft.com/*",
+    "https://admin.exchange.microsoft.com/*",
+    "https://admin.microsoft.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://security.microsoft.com/*",
+        "https://admin.exchange.microsoft.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "__MSG_extensionTitle__"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["config.json", "steps.json"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
